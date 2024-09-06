@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBuscadorDto } from './dto/create-buscador.dto';
 import { UpdateBuscadorDto } from './dto/update-buscador.dto';
+import { BuscadorEntity } from './entities/buscador.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { LibraryService } from './buscador.lib';
 
 @Injectable()
-export class BuscadorService {
-  create(createBuscadorDto: CreateBuscadorDto) {
-    return 'This action adds a new buscador';
-  }
+export class BuscadorService  {
+constructor(
+  @InjectRepository(BuscadorEntity) private buscadorTercero: Repository<BuscadorEntity>,
+  private readonly lib: LibraryService
+){}
 
-  findAll() {
+
+  async findByNit(createBuscadorDto: CreateBuscadorDto) {
+    console.log(createBuscadorDto)
+    var i =  this.lib
+    console.log(i.helloWorld())
     return `This action returns all buscador`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} buscador`;
-  }
 
-  update(id: number, updateBuscadorDto: UpdateBuscadorDto) {
-    return `This action updates a #${id} buscador`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} buscador`;
-  }
 }
