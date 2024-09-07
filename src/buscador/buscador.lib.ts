@@ -9,15 +9,15 @@ import * as xlsx from 'xlsx';
 export class LibraryService {
     private valoresBuscados: number[];
     private DATA: any[] = [];
-    private nombre_archivo: string;
+    // private nombre_archivo: string;
     private url: string = "https://muisca.dian.gov.co/WebRutMuisca/DefConsultaEstadoRUT.faces";
     private archivo: string = process.cwd().split('buscador')[0];
     private driver: WebDriver | null = null;
 
     constructor(
-      valoresBuscados: number[], nombre_archivo: string) {
+      valoresBuscados: number[]) { //, nombre_archivo: string
         this.valoresBuscados = valoresBuscados;
-        this.nombre_archivo = nombre_archivo;
+        // this.nombre_archivo = nombre_archivo;
     }
 
     async iniciar_navegador(): Promise<void> {
@@ -88,24 +88,24 @@ export class LibraryService {
         await this.cerrar_navegador();
     }
 
-    archivo_excel(): string {
-        const workbook = xlsx.utils.book_new();
-        const hoja_activa = xlsx.utils.aoa_to_sheet([['NIT', 'DV', 'APELLIDO 1', 'APELLIDO 2', 'NOMBRE 1', 'NOMBRE 2', 'RAZON SOCIAL', 'ESTADO']]);
-        xlsx.utils.sheet_add_aoa(hoja_activa, this.DATA, { origin: -1 });
+    // archivo_excel(): string {
+    //     const workbook = xlsx.utils.book_new();
+    //     const hoja_activa = xlsx.utils.aoa_to_sheet([['NIT', 'DV', 'APELLIDO 1', 'APELLIDO 2', 'NOMBRE 1', 'NOMBRE 2', 'RAZON SOCIAL', 'ESTADO']]);
+    //     xlsx.utils.sheet_add_aoa(hoja_activa, this.DATA, { origin: -1 });
 
-        xlsx.utils.book_append_sheet(workbook, hoja_activa, 'Resultados');
+    //     xlsx.utils.book_append_sheet(workbook, hoja_activa, 'Resultados');
 
-        const carpeta_delos_archivos = path.join(this.archivo, 'archivos');
-        const nombre_del_archivo_generado = this.nombre_archivo;
-        const numero_aleatorio = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
-        const ruta_archivo = path.join(carpeta_delos_archivos, `${nombre_del_archivo_generado}${numero_aleatorio}.xlsx`);
+    //     const carpeta_delos_archivos = path.join(this.archivo, 'archivos');
+    //     const nombre_del_archivo_generado = this.nombre_archivo;
+    //     const numero_aleatorio = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+    //     const ruta_archivo = path.join(carpeta_delos_archivos, `${nombre_del_archivo_generado}${numero_aleatorio}.xlsx`);
 
-        if (!fs.existsSync(carpeta_delos_archivos)) {
-            fs.mkdirSync(carpeta_delos_archivos);
-        }
+    //     if (!fs.existsSync(carpeta_delos_archivos)) {
+    //         fs.mkdirSync(carpeta_delos_archivos);
+    //     }
 
-        xlsx.writeFile(workbook, ruta_archivo);
+    //     xlsx.writeFile(workbook, ruta_archivo);
 
-        return `${nombre_del_archivo_generado}${numero_aleatorio}.xlsx`;
-    }
+    //     return `${nombre_del_archivo_generado}${numero_aleatorio}.xlsx`;
+    // }
 }

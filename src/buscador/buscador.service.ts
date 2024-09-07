@@ -28,13 +28,7 @@ export class BuscadorService {
 
     }
 
-
-    console.log("a bsucar ", valoresBuscados)
-    console.log("en base de datos", valoresEnBaseDeDatos)
-
-
-    const nombre_archivo = 'resultados';
-    const buscador = new LibraryService(valoresBuscados, nombre_archivo);
+    const buscador = new LibraryService(valoresBuscados);
     // await buscador.multiples_busquedas();
     await buscador.iniciar_navegador()
 
