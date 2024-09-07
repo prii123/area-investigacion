@@ -10,7 +10,7 @@ export class BuscadorController {
   constructor(private readonly buscadorService: BuscadorService) {}
 
   @Post()
-  create(@Body() createBuscadorDto: CreateBuscadorDto) {
+  create(@Body() createBuscadorDto: CreateBuscadorDto[]) {
     return this.buscadorService.findByNit(createBuscadorDto);
   }
 
